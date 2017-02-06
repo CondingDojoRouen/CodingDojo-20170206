@@ -7,29 +7,51 @@ namespace BankOCR
     [TestClass]
     public class BankOCRTests
     {
-        [TestMethod]
-        public void ThrowsFileNotFoundExceptionIfFileDoesntExists()
+        [TestClass]
+        public class BankOCRTests_DecodeFile
         {
-            // Arrange
-            string filePath = "bla";
 
-            // Act
+            [TestMethod]
+            public void ThrowsFileNotFoundExceptionIfFileDoesntExists()
+            {
+                // Arrange
+                string filePath = "bla";
 
-            //Assert
-            Assert.ThrowsException<FileNotFoundException>(() => BankOCR.DecodeFile(filePath));
+                // Act
+
+                //Assert
+                Assert.ThrowsException<FileNotFoundException>(() => BankOCR.DecodeFile(filePath));
+            }
+
+            [TestMethod]
+            public void ThrowsArgumentExceptionIfFilePathIsEmpty()
+            {
+                // Arrange
+                string filePath = string.Empty;
+
+                // Act
+
+                //Assert
+                Assert.ThrowsException<ArgumentException>(() => BankOCR.DecodeFile(filePath));
+            }
         }
-
-        [TestMethod]
-        public void ThrowsArgumentExceptionIfFilePathIsEmpty()
+        [TestClass]
+        public class BankOCRTests_IsFileValid
         {
-            // Arrange
-            string filePath = string.Empty;
+            [TestMethod]
+            public void ReturnsFileValidity()
+            {
+                // Arrange
+                string[] filePathValid = File.ReadAllLines(@"E:\CodingDojo\CodingDojo-20170206\assets\userstory1.txt");
+                string[] filePathNotValid = File.ReadAllLines(@"E:\CodingDojo\CodingDojo-20170206\assets\userstory1Invalid.txt");
+                string[] filePathNotValid2 = File.ReadAllLines(@"E:\CodingDojo\CodingDojo-20170206\assets\userstory1Invalid2.txt");
+                // Act
 
-            // Act
-
-            //Assert
-            Assert.ThrowsException<ArgumentException>(() => BankOCR.DecodeFile(filePath));
-
+                //Assert
+                Assert.IsTrue(BankOCR.IsValidFile(filePathValid));
+                Assert.IsFalse(BankOCR.IsValidFile(filePathNotValid));
+                Assert.IsFalse(BankOCR.IsValidFile(filePathNotValid2));
+            }
         }
     }
 }

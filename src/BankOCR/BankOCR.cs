@@ -15,15 +15,26 @@ namespace BankOCR
             {
                 File.ReadAllLines(filePath);
             }
-            catch(ArgumentException)
+            catch (ArgumentException)
             {
                 throw;
             }
-            catch(FileNotFoundException)
+            catch (FileNotFoundException)
             {
                 throw;
             }
-            
+
+        }
+
+        public static bool IsValidFile(string[] lines)
+        {
+            if (lines.Length != 4)
+                return false;
+
+            if (lines.Any(l => l.Length != 27))
+                return false;
+
+            return true;
         }
     }
 }
