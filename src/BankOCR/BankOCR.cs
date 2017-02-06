@@ -13,7 +13,8 @@ namespace BankOCR
         {
             try
             {
-                File.ReadAllLines(filePath);
+                var content = File.ReadAllLines(filePath);
+                IsValidFile(content);
             }
             catch (ArgumentException)
             {
@@ -23,15 +24,13 @@ namespace BankOCR
             {
                 throw;
             }
-
         }
 
         public static bool IsValidFile(string[] lines)
         {
-            if (lines.Length != 4)
-                return false;
-
-            if (lines.Any(l => l.Length != 27))
+            if (lines.Length != 4 
+                || lines.Any(l => l.Except(new char[] { '|', '_', ' ' }).Any())
+                || lines.Any(l => l.Length != 27))
                 return false;
 
             return true;

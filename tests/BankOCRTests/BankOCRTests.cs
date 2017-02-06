@@ -52,6 +52,18 @@ namespace BankOCR
                 Assert.IsFalse(BankOCR.IsValidFile(filePathNotValid));
                 Assert.IsFalse(BankOCR.IsValidFile(filePathNotValid2));
             }
+
+            [TestMethod]
+            public void ReturnsFalseIfFileContainsOtherCharactereThanPipeAndUnderscore()
+            {
+                // Arrange
+                string[] filePathValid = File.ReadAllLines(@"E:\CodingDojo\CodingDojo-20170206\assets\userstory1UnspectedChar.txt");
+
+                // Act
+
+                //Assert
+                Assert.IsFalse(BankOCR.IsValidFile(filePathValid));
+            }
         }
     }
 }
