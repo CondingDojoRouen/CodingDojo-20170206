@@ -11,6 +11,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankOCRTests", "tests\BankO
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankOCR", "src\BankOCR\BankOCR.csproj", "{CD82AD7E-5A57-42A3-B176-F2E7029956C3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assets", "assets", "{9D39AD4F-7068-4B03-8245-046E6FC31978}"
+	ProjectSection(SolutionItems) = preProject
+		assets\userstory1.txt = assets\userstory1.txt
+		assets\userstory1Invalid.txt = assets\userstory1Invalid.txt
+		assets\userstory1Invalid2.txt = assets\userstory1Invalid2.txt
+		assets\userstory1UnspectedChar.txt = assets\userstory1UnspectedChar.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
