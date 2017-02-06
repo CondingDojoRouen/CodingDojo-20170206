@@ -35,5 +35,10 @@ namespace BankOCR
 
             return true;
         }
+
+        public static string[] ParseNumbers(string[] lines)
+        {
+            return null;
+        }
     }
 }

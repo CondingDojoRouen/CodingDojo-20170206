@@ -35,6 +35,7 @@ namespace BankOCR
                 Assert.ThrowsException<ArgumentException>(() => BankOCR.DecodeFile(filePath));
             }
         }
+
         [TestClass]
         public class BankOCRTests_IsFileValid
         {
@@ -63,6 +64,21 @@ namespace BankOCR
 
                 //Assert
                 Assert.IsFalse(BankOCR.IsValidFile(filePathValid));
+            }
+        }
+
+        [TestClass]
+        public class BankOCRTests_ParseNumbers
+        {
+            [TestMethod]
+            public void ReturnsArrayWith9ElementsWhen4LinesAreSent()
+            {
+                //Arrange
+
+                //Act
+                var result = BankOCR.ParseNumbers(new string[4]);
+                //Assert
+                Assert.AreEqual(9, result.Length);
             }
         }
     }
