@@ -11,12 +11,25 @@ namespace BankOCR
         public void ThrowsFileNotFoundExceptionIfFileDoesntExists()
         {
             // Arrange
-            string filePath = string.Empty;
-            
+            string filePath = "bla";
+
             // Act
-            
+
             //Assert
             Assert.ThrowsException<FileNotFoundException>(() => BankOCR.DecodeFile(filePath));
+        }
+
+        [TestMethod]
+        public void ThrowsArgumentExceptionIfFilePathIsEmpty()
+        {
+            // Arrange
+            string filePath = string.Empty;
+
+            // Act
+
+            //Assert
+            Assert.ThrowsException<ArgumentException>(() => BankOCR.DecodeFile(filePath));
+
         }
     }
 }

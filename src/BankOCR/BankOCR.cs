@@ -11,8 +11,18 @@ namespace BankOCR
     {
         public static void DecodeFile(string filePath)
         {
-            if (!File.Exists(filePath))
-                throw new FileNotFoundException();
+            try
+            {
+                File.ReadAllLines(filePath);
+            }
+            catch(ArgumentException)
+            {
+                throw;
+            }
+            catch(FileNotFoundException)
+            {
+                throw;
+            }
             
         }
     }
