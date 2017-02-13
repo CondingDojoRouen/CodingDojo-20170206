@@ -45,6 +45,22 @@ namespace BankOCR
                 //Assert
                 Assert.IsTrue(result);
             }
+
+            [TestMethod]
+            public void Returns123456789WhenLitteral123456789AreSend()
+            {
+                //Arrange
+                string[] content = new string[] {
+                    "    _  _     _  _  _  _  _ ",
+                    "  | _| _||_||_ |_   ||_||_|",
+                    "  ||_  _|  | _||_|  ||_| _|",
+                    "                           "
+                };
+                //Act
+                var result = BankOCR.DecodeFile(content);
+                //Assert
+                Assert.AreEqual(123456789, result);
+            }
         }
 
         [TestClass]
@@ -162,8 +178,21 @@ namespace BankOCR
                 //Assert
                 Assert.AreEqual(123456789, result);
             }
+        }
 
-
+        [TestClass]
+        public class BankOCRTests_ValidAccountNumber
+        {
+            [TestMethod]
+            public void ReturnsAccountNumberValidity()
+            {
+                //Arrange
+                int account = 51;
+                //Act
+                var result = BankOCR.AccountNumberValid(account);
+                //Assert
+                Assert.IsTrue(result);
+            }
         }
     }
 }

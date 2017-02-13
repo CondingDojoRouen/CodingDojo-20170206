@@ -14,7 +14,7 @@ namespace BankOCR
             int decodeNumber = -1;
 
             if (CheckFileCompliant(fileContent))
-                decodeNumber = 0;
+                decodeNumber = ParseNumbers(fileContent);
 
             return decodeNumber;
         }
@@ -42,6 +42,13 @@ namespace BankOCR
                 k = 0;
             }
             return strParsed.Select(s => litteralDigit[s]).Aggregate((a, b) => a * 10 + b);
+        }
+
+        public static bool AccountNumberValid(int account)
+        {
+            var checksum = account.ToString("000000000").Select((n, i) => Convert.ToInt32(n - '0') * (9 - i)).Aggregate((a, b) => a + b);
+             
+            return checksum % 11 == 0;
         }
 
         public static Dictionary<string, int> litteralDigit = new Dictionary<string, int>
@@ -81,7 +88,11 @@ namespace BankOCR
             {" _ " +
              "|_|" +
              " _|" +
-             "   ", 9}
+             "   ", 9},
+            {" _ " +
+             "| |" +
+             "|_|" +
+             "   ", 0 },
         };
     }
 }
