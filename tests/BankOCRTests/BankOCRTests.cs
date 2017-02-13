@@ -139,10 +139,31 @@ namespace BankOCR
                 };
 
                 //Act
-                var result = BankOCR.ParseNumbers(new string[4]);
+                var result = BankOCR.ParseNumbers(content);
+
                 //Assert
                 Assert.AreEqual(9, result.ToString().Length);
             }
+
+            [TestMethod]
+            public void Returns123456789WhenLiteral123456789AreSend()
+            {
+                //Arrange
+                string[] content = new string[] {
+                    "    _  _     _  _  _  _  _ ",
+                    "  | _| _||_||_ |_   ||_||_|",
+                    "  ||_  _|  | _||_|  ||_| _|",
+                    "                           "
+                };
+
+                //Act
+                var result = BankOCR.ParseNumbers(content);
+
+                //Assert
+                Assert.AreEqual(123456789, result);
+            }
+
+
         }
     }
 }
