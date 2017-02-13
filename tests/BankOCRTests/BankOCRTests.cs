@@ -1,6 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Linq;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace BankOCR
 {
@@ -192,6 +194,23 @@ namespace BankOCR
                 var result = BankOCR.AccountNumberValid(account);
                 //Assert
                 Assert.IsTrue(result);
+            }
+        }
+
+        [TestClass]
+        public class BankOCRTests_LogEntries
+        {
+            [TestMethod]
+            public void ReturnsFileWithLogFor3DifferentEntries()
+            {
+                //Arrange
+                string[] entries = { "457508000", "664371495", "86110??36" };
+                //Act
+                string[] result = BankOCR.LogEntries(entries);
+                //Assert
+                Assert.IsFalse(Regex.IsMatch(result[0], "ERR|ILL"));
+                Assert.IsTrue(Regex.IsMatch(result[1], "ERR"));
+                Assert.IsTrue(Regex.IsMatch(result[2], "ILL"));
             }
         }
     }

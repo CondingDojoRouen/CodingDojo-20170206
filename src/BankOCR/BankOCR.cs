@@ -16,6 +16,9 @@ namespace BankOCR
             if (CheckFileCompliant(fileContent))
                 decodeNumber = ParseNumbers(fileContent);
 
+            if (!AccountNumberValid(decodeNumber))
+                decodeNumber = -1;
+
             return decodeNumber;
         }
 
