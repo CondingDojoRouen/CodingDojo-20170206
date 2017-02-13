@@ -9,26 +9,19 @@ namespace BankOCR
 {
     public static class BankOCR
     {
-        public static void DecodeFile(string filePath)
+        public static int DecodeFile(string[] fileContent)
         {
-            try
-            {
-                var content = File.ReadAllLines(filePath);
-                IsValidFile(content);
-            }
-            catch (ArgumentException)
-            {
-                throw;
-            }
-            catch (FileNotFoundException)
-            {
-                throw;
-            }
+            int decodeNumber = -1;
+
+            if (CheckFileCompliant(fileContent))
+                decodeNumber = 0;
+
+            return decodeNumber;
         }
 
-        public static bool IsValidFile(string[] lines)
+        public static bool CheckFileCompliant(string[] lines)
         {
-            if (lines.Length != 4 
+            if (lines.Length != 4
                 || lines.Any(l => l.Except(new char[] { '|', '_', ' ' }).Any())
                 || lines.Any(l => l.Length != 27))
                 return false;

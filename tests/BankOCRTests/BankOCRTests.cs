@@ -10,60 +10,117 @@ namespace BankOCR
         [TestClass]
         public class BankOCRTests_DecodeFile
         {
-
             [TestMethod]
-            public void ThrowsFileNotFoundExceptionIfFileDoesntExists()
+            public void ReturnsNegativeValueIfContentIsNotCompliant()
             {
                 // Arrange
-                string filePath = "bla";
+                string[] contentValid = new string[] {
+                    "    _  _     _  _  _  _  _ ",
+                    "  | _| _||_||_ |_   ||_||_|",
+                    "  ||_  _|  @ _||_|  ||_| _|",
+                    "                           "
+                };
 
                 // Act
+                var result = BankOCR.DecodeFile(contentValid) < 0;
 
                 //Assert
-                Assert.ThrowsException<FileNotFoundException>(() => BankOCR.DecodeFile(filePath));
+                Assert.IsTrue(result);
             }
 
             [TestMethod]
-            public void ThrowsArgumentExceptionIfFilePathIsEmpty()
+            public void ReturnsPositiveValueIfContentIsCompliant()
             {
                 // Arrange
-                string filePath = string.Empty;
+                string[] contentValid = new string[] {
+                    "    _  _     _  _  _  _  _ ",
+                    "  | _| _||_||_ |_   ||_||_|",
+                    "  ||_  _|  | _||_|  ||_| _|",
+                    "                           "
+                };
 
                 // Act
+                var result = BankOCR.DecodeFile(contentValid) >= 0;
 
                 //Assert
-                Assert.ThrowsException<ArgumentException>(() => BankOCR.DecodeFile(filePath));
+                Assert.IsTrue(result);
             }
         }
 
         [TestClass]
-        public class BankOCRTests_IsFileValid
+        public class BankOCRTests_CheckFileCompliant
         {
             [TestMethod]
-            public void ReturnsFileValidity()
+            public void ReturnsTrueIfContentIsCompliant()
             {
                 // Arrange
-                string[] filePathValid = File.ReadAllLines(@"E:\CodingDojo\CodingDojo-20170206\assets\userstory1.txt");
-                string[] filePathNotValid = File.ReadAllLines(@"E:\CodingDojo\CodingDojo-20170206\assets\userstory1Invalid.txt");
-                string[] filePathNotValid2 = File.ReadAllLines(@"E:\CodingDojo\CodingDojo-20170206\assets\userstory1Invalid2.txt");
+                string[] validContent = new string[] {
+                    "    _  _     _  _  _  _  _ ",
+                    "  | _| _||_||_ |_   ||_||_|",
+                    "  ||_  _|  | _||_|  ||_| _|",
+                    "                           "
+                };
+
                 // Act
+                var result = BankOCR.CheckFileCompliant(validContent);
 
                 //Assert
-                Assert.IsTrue(BankOCR.IsValidFile(filePathValid));
-                Assert.IsFalse(BankOCR.IsValidFile(filePathNotValid));
-                Assert.IsFalse(BankOCR.IsValidFile(filePathNotValid2));
+                Assert.IsTrue(result);
             }
 
             [TestMethod]
-            public void ReturnsFalseIfFileContainsOtherCharactereThanPipeAndUnderscore()
+            public void ReturnsFalseIfContentContainsMoreThan4Lines()
             {
                 // Arrange
-                string[] filePathValid = File.ReadAllLines(@"E:\CodingDojo\CodingDojo-20170206\assets\userstory1UnspectedChar.txt");
+                string[] notValidContent = new string[] {
+                    "    _  _     _  _  _  _  _ ",
+                    "  | _| _||_||_ |_   ||_||_|",
+                    "  ||_  _|  | _||_|  ||_| _|",
+                    "                           ",
+                    ""
+                };
 
                 // Act
+                var result = BankOCR.CheckFileCompliant(notValidContent);
 
                 //Assert
-                Assert.IsFalse(BankOCR.IsValidFile(filePathValid));
+                Assert.IsFalse(result);
+            }
+
+            [TestMethod]
+            public void ReturnsFalseIfContentContainsOneLineWithMoreThan27Chars()
+            {
+                // Arrange
+                string[] notValidContent = new string[] {
+                    "    _  _     _  _  _  _  _ ",
+                    "  | _| _||_||_ |_   ||_||_|",
+                    "  ||_  _|  | _||_|  ||_| _| ",
+                    "                           "
+                };
+
+                // Act
+                var result = BankOCR.CheckFileCompliant(notValidContent);
+
+                //Assert
+                Assert.IsFalse(result);
+            }
+
+            [TestMethod]
+            public void ReturnsFalseIfContentContainsOtherCharactereThanPipeSpaceAndUnderscore()
+            {
+                // Arrange
+                string[] content = new string[] {
+                    "    _  _     _  _  _  _  _ ",
+                    "  | _| _||_||_ |_   ||_||_|",
+                    "  ||_  _|  | _||_|  ||_@ _|",
+                    "                           "
+                };
+
+                // Act
+                var result = BankOCR.CheckFileCompliant(content);
+
+                //Assert
+                Assert.IsFalse(result);
             }
         }
 

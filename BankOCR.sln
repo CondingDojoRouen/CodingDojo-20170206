@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26206.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{EE0FE971-EC04-4170-9070-FE82BA8D090A}"
 EndProject
@@ -10,14 +10,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankOCRTests", "tests\BankOCRTests\BankOCRTests.csproj", "{8B53808D-6363-4864-A4DF-8937C0CD1B94}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankOCR", "src\BankOCR\BankOCR.csproj", "{CD82AD7E-5A57-42A3-B176-F2E7029956C3}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assets", "assets", "{9D39AD4F-7068-4B03-8245-046E6FC31978}"
-	ProjectSection(SolutionItems) = preProject
-		assets\userstory1.txt = assets\userstory1.txt
-		assets\userstory1Invalid.txt = assets\userstory1Invalid.txt
-		assets\userstory1Invalid2.txt = assets\userstory1Invalid2.txt
-		assets\userstory1UnspectedChar.txt = assets\userstory1UnspectedChar.txt
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
