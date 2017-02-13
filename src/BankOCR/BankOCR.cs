@@ -25,13 +25,13 @@ namespace BankOCR
                 || lines.Any(l => l.Except(new char[] { '|', '_', ' ' }).Any())
                 || lines.Any(l => l.Length != 27))
                 return false;
-
+            
             return true;
         }
 
-        public static string[] ParseNumbers(string[] lines)
+        public static int ParseNumbers(string[] lines)
         {
-            return null;
+            return 100000000;
         }
     }
 }

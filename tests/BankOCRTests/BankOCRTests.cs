@@ -128,14 +128,20 @@ namespace BankOCR
         public class BankOCRTests_ParseNumbers
         {
             [TestMethod]
-            public void ReturnsArrayWith9ElementsWhen4LinesAreSent()
+            public void ReturnsIntegerWith9NumbersWhen4LinesAreSent()
             {
                 //Arrange
+                string[] content = new string[] {
+                    "    _  _     _  _  _  _  _ ",
+                    "  | _| _||_||_ |_   ||_||_|",
+                    "  ||_  _|  | _||_|  ||_| _|",
+                    "                           "
+                };
 
                 //Act
                 var result = BankOCR.ParseNumbers(new string[4]);
                 //Assert
-                Assert.AreEqual(9, result.Length);
+                Assert.AreEqual(9, result.ToString().Length);
             }
         }
     }
